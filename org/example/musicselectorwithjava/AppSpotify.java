@@ -1,7 +1,7 @@
-import javax.imageio.IIOException;
+package org.example.musicselectorwithjava;
+
 import java.awt.Desktop;
 import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -15,7 +15,7 @@ public class AppSpotify {
         ventana.setSize(400, 200);
         // Cerramos el objeto para evitar que consuma RAM en segundo plano
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ventana.setVisible(true);
+
 
         // Instanciamos el objeto botón
         JButton botonLogin = new JButton("Conectar con Spotify");
@@ -46,8 +46,9 @@ public class AppSpotify {
                 // Se imprime el error para la depuración
                 ex.printStackTrace();
             }
-        });
 
+        });
+        ventana.setVisible(true);
     }
 }
 

@@ -1,4 +1,5 @@
-import java.io.StringWriter;
+package org.example.musicselectorwithjava;
+
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -9,7 +10,7 @@ import java.security.MessageDigest;
 public class AutenticadorSpotify {
     // visibilidad, modificador de clase, modificador de inmutabilidad, tipo de dato
     private static final String ID_APLICACION = "c86c729b012a485abafcf69d51b59916";
-    private static final String URL_REDIRECCION = "https://accounts.spotify.com/authorize";
+    private static final String URL_REDIRECCION = "http://127.0.0.1:8080/callback";
     private String verificador;
 
     // Verificador de autenticidad para el usuario (generador contraseña temporal)
