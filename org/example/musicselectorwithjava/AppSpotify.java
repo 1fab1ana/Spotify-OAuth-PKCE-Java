@@ -29,6 +29,33 @@ public class AppSpotify {
             // Instanciamos el proceso para obtener verificador/challenge en cada vez
             AutenticadorSpotify auth = new AutenticadorSpotify();
 
+            try {
+                // 1. Reservamos el puerto
+                HttpServer servidor = HttpServer.create(new InetSocketAddress(8080), 0);
+
+                // 2. Definimos la ruta ANTES de arrancar
+                servidor.createContext("/callback", exchange -> {
+                    // Aquí capturamos el código
+                    String query = exchange.getRequestURI().getQuery();
+                    System.out.println("¡Código capturado!: " + query);
+
+                    // Enviamos un mensaje simple al navegador para que el usuario sepa que terminó
+                    String respuesta = "Autenticacion exitosa. Ya puedes cerrar esta ventana.";
+                    exchange.sendResponseHeaders(200, respuesta.length());
+                    exchange.getResponseBody().write(respuesta.getBytes());
+                    exchange.close();
+
+                    // 3. Detenemos el servidor después de recibir el código para liberar el puerto
+                    servidor.stop(0);
+                });
+
+                // 4. Ahora sí, encendemos
+                servidor.start();
+                System.out.println("Servidor escuchando en el puerto 8080...");
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
             // Invocamos al metodo que obtiene la url parametrada
             String urlString = auth.obtenerURL();
             try {
